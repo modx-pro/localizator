@@ -25,6 +25,11 @@ switch ($modx->event->name) {
         break;
     case 'OnDocFormPrerender':
         if ($mode == 'upd' && $resource instanceof modResource) {
+            $disabledTemplates = $modx->getOption('localizator_disabled_templates', null, '', true);
+            $disabledTemplates = array_map('trim', array_filter(explode(',', $disabledTemplates)));
+            if (in_array((string)$resource->get('template'), $disabledTemplates, true)) {
+                break;
+            }
             $modx->controller->addLexiconTopic('localizator:default');
             $modx->controller->addCss($localizator->config['cssUrl'] . 'mgr/main.css');
             $modx->controller->addCss($localizator->config['cssUrl'] . 'mgr/bootstrap.buttons.css');
@@ -100,6 +105,7 @@ switch ($modx->event->name) {
         break;
 
     case 'OnLoadWebDocument':
+        require_once $localizator->config['modelPath'] . 'localizator/localizatorresourcetvwrapper.class.php';
         $q = $modx->newQuery('localizatorContent');
         $q->leftJoin('localizatorLanguage', 'localizatorLanguage', 'localizatorLanguage.key = localizatorContent.key');
         $q->where(array(
@@ -123,18 +129,18 @@ switch ($modx->event->name) {
                     $modx->resource->set($field, $value);
                 }
             }
+            $localizatorTVOutput = array();
             foreach ($content->getTVKeys() as $field) {
                 $value = $content->get($field);
                 if (!empty($value)) {
                     $value = localizatorContent::renderTVOutput($modx, $field, $value, $modx->resource->id);
-                    $modx->resource->_fieldMeta[$field] = [
-                        'dbtype' => 'mediumtext',
-                        'phptype' => 'string',
-                    ];
-
-                    $placeholders[$field] = $value;
                     $modx->resource->set($field, $value);
+                    $localizatorTVOutput[$field] = $value;
+                    $placeholders[$field] = $value;
                 }
+            }
+            if (!empty($localizatorTVOutput)) {
+                $modx->resource = new LocalizatorResourceTVWrapper($modx->resource, $localizatorTVOutput);
             }
             $modx->setPlaceholders($placeholders, '*');
         }
@@ -169,9 +175,15 @@ switch ($modx->event->name) {
                     $content->save();
                 }
             }
-        } elseif (in_array($resource->get('class_key'), array('modStaticResource', 'modSymLink', 'modWebLink'))) {
+        } elseif ($resource->get('class_key') === 'modStaticResource') {
             $upd = $modx->prepare("UPDATE " . $modx->getTableName('localizatorContent') . " SET `content` = ? WHERE `resource_id` = ?");
             $upd->execute(array($resource->get('content'), $resource->get('id')));
+        } elseif (in_array($resource->get('class_key'), array('modSymLink', 'modWebLink'))) {
+            $defaultKey = $modx->getOption('localizator_default_language', null, '', true);
+            if ($defaultKey !== '') {
+                $upd = $modx->prepare("UPDATE " . $modx->getTableName('localizatorContent') . " SET `content` = ? WHERE `resource_id` = ? AND `key` = ?");
+                $upd->execute(array($resource->get('content'), $resource->get('id'), $defaultKey));
+            }
         }
         break;
 

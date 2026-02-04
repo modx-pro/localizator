@@ -438,7 +438,6 @@ Ext.extend(MODx.window.UpdatLocalizatorItem,Ext.Window,{
             ,baseParams: this.config.baseParams || { action: this.config.action || '' }
             //,items: this.config.fields || []
         });
-		//console.log('renderForm');
         this.add(this.fp);
     }	
     ,createForm: function(config){

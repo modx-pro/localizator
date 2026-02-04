@@ -15,6 +15,11 @@ $tmp = array(
         'value' => false,
         'area' => 'localizator_main',
     ),
+    'disabled_templates' => array(
+        'xtype' => 'textfield',
+        'value' => '',
+        'area' => 'localizator_main',
+    ),
 
     // translator
     'default_translator' => array(
