@@ -32,3 +32,6 @@ $_lang['setting_localizator_tv_fields_desc'] = 'Указанные дополн�
 
 $_lang['setting_localizator_check_permissions'] = 'Проверять доступ на редактирование';
 $_lang['setting_localizator_check_permissions_desc'] = 'Проверять доступ на редактирование Локализаций ресурса';
+
+$_lang['setting_localizator_disabled_templates'] = 'Отключить вкладку локализации для шаблонов';
+$_lang['setting_localizator_disabled_templates_desc'] = 'Перечень ID шаблонов через запятую. Для ресурсов с этими шаблонами вкладка «Локализатор» не будет отображаться.';

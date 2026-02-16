@@ -84,7 +84,12 @@ class localizatorFormProcessor extends modProcessor
                 'caption' => $this->modx->lexicon('localizator_keywords'),
             ),
         );
-        if (!in_array($class_key, array('modStaticResource', 'modSymLink', 'modWebLink'))) {
+        if (in_array($class_key, array('modWebLink', 'modSymLink'))) {
+            $resourcefields['content'] = array(
+                'inputTVtype' => 'number',
+                'caption' => $this->modx->lexicon('resource_content'),
+            );
+        } elseif ($class_key !== 'modStaticResource') {
             $resourcefields['content'] = array(
                 'inputTVtype' => $richtext ? 'richtext' : 'textarea',
             );

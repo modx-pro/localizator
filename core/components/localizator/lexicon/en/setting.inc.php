@@ -32,3 +32,6 @@ $_lang['setting_localizator_tv_fields_desc'] = 'These additional fields will be 
 
 $_lang['setting_localizator_check_permissions'] = 'Check permissions';
 $_lang['setting_localizator_check_permissions_desc'] = 'Check permissions to edit localization';
+
+$_lang['setting_localizator_disabled_templates'] = 'Disable localization tab for templates';
+$_lang['setting_localizator_disabled_templates_desc'] = 'Comma-separated list of template IDs. The Localizator tab will not be shown for resources using these templates.';

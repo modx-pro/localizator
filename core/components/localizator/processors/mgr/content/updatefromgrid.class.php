@@ -35,9 +35,14 @@ class localizatorContentUpdateFromGridProcessor extends localizatorContentUpdate
         $properties = $this->getProperties();
 
         foreach ($properties as $key => $value) {
-            if ($key == '_key') {
-                $key_value = explode(" ", $value);
-                $this->setProperty('key', $key_value[0]);
+            if ($key == '_key' && $value !== '' && $value !== null) {
+                // _key from grid can be display value like "English [en] (http_host)" — use key from brackets
+                if (preg_match('/\[([^\]]+)\]/', $value, $m)) {
+                    $this->setProperty('key', trim($m[1]));
+                } else {
+                    $key_value = explode(" ", $value);
+                    $this->setProperty('key', $key_value[0]);
+                }
             }
         }
 

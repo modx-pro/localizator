@@ -1,6 +1,14 @@
 Changelog for localizator.
 
 
+1.1.0-beta
+==============
+- Fixed wrong language key when editing title from grid (issue #6): key is now taken from [key] in display value
+- Removed console.log from content grid (issue #7)
+- Added system setting "Disable localization tab for templates" and plugin support (issue #5): comma-separated template IDs hide the Localizator tab
+- Fixed modWebLink/modSymLink content field (issue #4): field is shown in localization form and per-language link target is saved correctly; default language only is updated on resource save
+- Fixed duplicate path in TV when outputting via Fenom {$resource.tvName} (issue #3): LocalizatorResourceTVWrapper prevents double application of TV output (e.g. image basePath)
+
 1.0.9-beta
 ==============
 - Moved yandex translator in custom class

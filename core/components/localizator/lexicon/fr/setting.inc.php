@@ -26,3 +26,6 @@ $_lang['setting_localizator_tv_fields_desc'] = 'Ces champs supplémentaires sero
 
 $_lang['setting_localizator_check_permissions'] = 'Vérifier les autorisations';
 $_lang['setting_localizator_check_permissions_desc'] = 'Vérifier les autorisations pour modifier la localisation';
+
+$_lang['setting_localizator_disabled_templates'] = 'Désactiver l’onglet de localisation pour les modèles';
+$_lang['setting_localizator_disabled_templates_desc'] = 'Liste d’ID de modèles séparés par des virgules. L’onglet Localizator ne sera pas affiché pour les ressources utilisant ces modèles.';
