@@ -1,75 +1,118 @@
-Changelog for localizator.
+# Changelog
 
+All notable changes to this project will be documented in this file.
 
-1.1.0-beta
-==============
-- Fixed wrong language key when editing title from grid (issue #6): key is now taken from [key] in display value
-- Removed console.log from content grid (issue #7)
-- Added system setting "Disable localization tab for templates" and plugin support (issue #5): comma-separated template IDs hide the Localizator tab
-- Fixed modWebLink/modSymLink content field (issue #4): field is shown in localization form and per-language link target is saved correctly; default language only is updated on resource save
-- Fixed duplicate path in TV when outputting via Fenom {$resource.tvName} (issue #3): LocalizatorResourceTVWrapper prevents double application of TV output (e.g. image basePath)
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-1.0.9-beta
-==============
-- Moved yandex translator in custom class
-- Added simple copying of strings, without translation
-- PSR-12 compatible document formatting 
-- Added google translator
-- Added deepl translator (text mode)
+## [1.1.1-beta] - 2026-06-16
 
-1.0.8-beta
-==============
-- Fixing 500 error when going to an unpublished resource by link (by Ibochkarev)
-- Added "getLocales" snippet (by Ibochkarev)
+### Fixed
+- MySQL 8 SQL syntax error in the localization fields grid when TVs are grouped by category: `rank` is a reserved word in MySQL 8 — `fields.class.php` now sorts by `` `rank` `` instead of `rank`, so category names render correctly instead of "Undefined".
 
-1.0.7-beta
-==============
-- Fixed TV checkbox (9-issue)
-- Fixed content field (4-issue)
-- Added modifier "locfield"
-- Removed setting localizator_tv_fields
-- Added checkbox "TV is available in localizations" in TV settings
-- Fixed mse2LocalizatorFilter
+## [1.1.0-beta] - 2026-02-04
 
-1.0.6-beta
-==============
-- Fixed TV tabs
-- Added events
+### Added
+- System setting `localizator_disable_templates`: comma-separated template IDs hide the Localizator tab on the resource form (issue #5).
 
-1.0.5-beta1
-==============
-- Fixed processTVs
-- Added policy template for editing localizations
-- Added german lexicon (by Ibochkarev).
-- Added franch lexicon (by Ibochkarev).
+### Fixed
+- Wrong language key when editing title from the grid (issue #6): key is taken from `[key]` in the display value.
+- `modWebLink` / `modSymLink` content field (issue #4): field is shown in the localization form; per-language link target is saved correctly; only the default language is updated on resource save.
+- Duplicate path in TV output via Fenom `{$resource.tvName}` (issue #3): `LocalizatorResourceTVWrapper` prevents double application of TV output (e.g. image `basePath`).
 
-1.0.4-beta1
-==============
-- Fixed error modWebLink resources
-- Fixed error tinymce_rte
+### Removed
+- Debug `console.log` from the content grid (issue #7).
 
-1.0.4-beta
-==============
-- Fixed snippet Localizator
-- Fixed plugin Localizator
-- Fixed localizator.class.php
-- Added mse2_filters_handler_class
-- Added localization fields indexing in mSearch2 (by pavelgvozdb - https://modx.pro/howto/16466)
+## [1.0.9-beta] - 2022-12-18
 
-1.0.3-beta
-==============
-- Fixed snippet Localizator
+### Added
+- Google Translate integration.
+- DeepL translator (text mode).
+- Simple string copy without machine translation.
 
-1.0.2-beta
-==============
-- Added translate for migxtv fields (by nizart91)
-- Fixed localizatorcontent.class.php
-- Fixed snippet Localizator
+### Changed
+- Yandex translator moved to a dedicated custom class.
+- Document formatting aligned with PSR-12.
 
-1.0.1-beta
-==============
-- Added localization for tv fields (by nizart91)
+## [1.0.8-beta] - 2020-11-16
 
-1.0.0-beta
-==============
-- First release
+### Added
+- `getLocales` snippet (by Ibochkarev).
+
+### Fixed
+- HTTP 500 when opening an unpublished resource by direct link (by Ibochkarev).
+
+## [1.0.7-beta] - 2020-01-14
+
+### Added
+- Fenom modifier `locfield`.
+- Checkbox «TV is available in localizations» in TV settings.
+
+### Changed
+- `mse2LocalizatorFilter` behavior and compatibility.
+
+### Fixed
+- TV checkbox handling (issue #9).
+- Content field in localization form (issue #4).
+
+### Removed
+- System setting `localizator_tv_fields` (replaced by per-TV checkbox).
+
+## [1.0.6-beta] - 2019-09-10
+
+### Added
+- Plugin events for extension hooks.
+
+### Fixed
+- TV tabs on the localization form.
+
+## [1.0.5-beta1]
+
+### Added
+- Policy template for editing localizations.
+- German lexicon (by Ibochkarev).
+- French lexicon (by Ibochkarev).
+
+### Fixed
+- `processTVs` handling in the manager.
+
+## [1.0.4-beta1]
+
+### Fixed
+- `modWebLink` resource errors in the manager.
+- `tinymce_rte` integration on the localization tab.
+
+## [1.0.4-beta]
+
+### Added
+- System setting `mse2_filters_handler_class`.
+- mSearch2 localization field indexing (by pavelgvozdb — https://modx.pro/howto/16466).
+
+### Fixed
+- `Localizator` snippet.
+- `Localizator` plugin.
+- `localizator.class.php` core logic.
+
+## [1.0.3-beta]
+
+### Fixed
+- `Localizator` snippet.
+
+## [1.0.2-beta]
+
+### Added
+- Translation support for MIGX TV fields (by nizart91).
+
+### Fixed
+- `localizatorcontent.class.php`.
+- `Localizator` snippet.
+
+## [1.0.1-beta]
+
+### Added
+- Localization for Template Variable fields (by nizart91).
+
+## [1.0.0-beta] - 2017-04-24
+
+### Added
+- First public release of the Localizator extra for MODX Revolution.
