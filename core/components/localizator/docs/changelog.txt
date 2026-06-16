@@ -5,14 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.2-beta] - 2026-06-17
-
-### Fixed
-- Bulk lexicon auto-translate stopped after the first existing translation for a key (issue #9): `translate.class.php` uses `continue` instead of `break` so remaining languages are still processed when overwrite is disabled.
-
 ## [1.1.1-beta] - 2026-06-16
 
 ### Fixed
+- Bulk lexicon auto-translate stopped after the first existing translation for a key (issue #9): `translate.class.php` uses `continue` instead of `break` so remaining languages are still processed when overwrite is disabled.
 - MySQL 8 SQL syntax error in the localization fields grid when TVs are grouped by category: `rank` is a reserved word in MySQL 8 — `fields.class.php` now sorts by `` `rank` `` instead of `rank`, so category names render correctly instead of "Undefined".
 
 ## [1.1.0-beta] - 2026-02-04
