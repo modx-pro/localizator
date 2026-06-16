@@ -44,9 +44,9 @@ class localizatorLexiconTranslateProcessor extends modProcessor
 					'name' => $entry->name,
 				));
 
-				// если уже есть запись и указано не перезаписывать - прерываем цикл
-				if ($tmp->value && !$tranlate_all) {
-					break;
+				// если уже есть запись и указано не перезаписывать — пропускаем этот язык
+				if ($tmp && $tmp->get('value') && !$tranlate_all) {
+					continue;
 				}
 
 				if (!$tmp) {
